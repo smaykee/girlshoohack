@@ -13,13 +13,15 @@ class MyApp extends StatelessWidget {
   //adding stuff here 2:03 pm
   @override
   Widget build(BuildContext){
-    return MaterialApp(
+    return const MaterialApp(
       home: free2pee(),
     );
   }
 }
 
 class free2pee extends StatefulWidget{
+  const free2pee({super.key});
+
   @override
   _free2peeState createState() => _free2peeState();
 }
@@ -27,9 +29,9 @@ class free2pee extends StatefulWidget{
 class _free2peeState extends State<free2pee>{
   GoogleMapController mapController;
 
-  final LatLng uvaCoordinates = LatLng(38.0336, -78.5079);
+  final LatLng uvaCoordinates = const LatLng(38.0336, -78.5079);
 
-  CameraPosition initialPosition = CameraPosition(
+  CameraPosition initialPosition = const CameraPosition(
     target: LatLng(38.0336, -78.5079), // UVA coordinates
     zoom: 15, // Adjust the zoom level as needed
   );
@@ -37,7 +39,7 @@ class _free2peeState extends State<free2pee>{
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
-        title: Text('UVA Bathroom Finder'),
+        title: const Text('UVA Bathroom Finder'),
       ),
       body: GoogleMap(
         initialCameraPosition: initialPosition, 
@@ -48,7 +50,7 @@ class _free2peeState extends State<free2pee>{
           Marker(
             markerId: MarkerID('UVA'),
             position: uvaCoordinates,
-            infoWindow: InfoWindow(
+            infoWindow: const InfoWindow(
               title: 'University of Virginia',
               snippet: 'Charlottesville, VA',
             ),
