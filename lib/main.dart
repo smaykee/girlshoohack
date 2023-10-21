@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'bathroom.dart';
 
 void main() {
   runApp(const MyApp());
@@ -7,26 +8,25 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-  
 
   // This widget is the root of your application.
   //adding stuff here 2:03 pm
   @override
-  Widget build(BuildContext){
+  Widget build(BuildContext) {
     return const MaterialApp(
       home: free2pee(),
     );
   }
 }
 
-class free2pee extends StatefulWidget{
+class free2pee extends StatefulWidget {
   const free2pee({Key? key}) : super(key: key);
 
   @override
   _free2peeState createState() => _free2peeState();
 }
 
-class _free2peeState extends State<free2pee>{
+class _free2peeState extends State<free2pee> {
   GoogleMapController? mapController;
 
   final LatLng uvaCoordinates = const LatLng(38.0336, -78.5079);
@@ -36,29 +36,28 @@ class _free2peeState extends State<free2pee>{
     zoom: 15, // Adjust the zoom level as needed
   );
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('UVA Bathroom Finder'),
       ),
       body: GoogleMap(
-        initialCameraPosition: initialPosition, 
-        onMapCreated: (GoogleMapController controller){
+        initialCameraPosition: initialPosition,
+        onMapCreated: (GoogleMapController controller) {
           mapController = controller;
         },
-        markers: {
-          Marker(
-            markerId: MarkerId('UVA'),
-            position: uvaCoordinates,
-            infoWindow: const InfoWindow(
-              title: 'University of Virginia',
-              snippet: 'Charlottesville, VA',
+        markers: sampleBathrooms.map((bathroom) {
+          return Marker(
+            markerId: MarkerId(bathroom.name),
+            position: LatLng(bathroom.latitude, bathroom.longitude),
+            infoWindow: InfoWindow(
+              title: bathroom.name,
             ),
-          ),
-        },
-        ),
+          );
+        }).toSet(),
+      ),
     );
-}
+  }
 }
 /*
   @override
