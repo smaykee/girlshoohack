@@ -7,8 +7,58 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+  
 
   // This widget is the root of your application.
+  //adding stuff here 2:03 pm
+  @override
+  Widget build(BuildContext){
+    return MaterialApp(
+      home: free2pee(),
+    );
+  }
+}
+
+class free2pee extends StatefulWidget{
+  @override
+  _free2peeState createState() => _free2peeState();
+}
+
+class _free2peeState extends State<free2pee>{
+  GoogleMapController mapController;
+
+  final LatLng uvaCoordinates = LatLng(38.0336, -78.5079);
+
+  CameraPosition initialPosition = CameraPosition(
+    target: LatLng(38.0336, -78.5079), // UVA coordinates
+    zoom: 15, // Adjust the zoom level as needed
+  );
+  @override
+  Widget build(BuildContext context){
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('UVA Bathroom Finder'),
+      ),
+      body: GoogleMap(
+        initialCameraPosition: initialPosition, 
+        onMapCreated: (GoogleMapController controller),{
+          mapController = controller;
+        },
+        markers: {
+          Marker(
+            markerId: MarkerID('UVA'),
+            position: uvaCoordinates,
+            infoWindow: InfoWindow(
+              title: 'University of Virginia',
+              snippet: 'Charlottesville, VA',
+            ),
+          ),
+        },
+        ),
+    );
+}
+}
+/*
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -35,7 +85,7 @@ class MyApp extends StatelessWidget {
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
-}
+}*/
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
