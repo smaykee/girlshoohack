@@ -6,7 +6,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
   
 
   // This widget is the root of your application.
@@ -20,14 +20,14 @@ class MyApp extends StatelessWidget {
 }
 
 class free2pee extends StatefulWidget{
-  const free2pee({super.key});
+  const free2pee({Key? key}) : super(key: key);
 
   @override
   _free2peeState createState() => _free2peeState();
 }
 
 class _free2peeState extends State<free2pee>{
-  GoogleMapController mapController;
+  GoogleMapController? mapController;
 
   final LatLng uvaCoordinates = const LatLng(38.0336, -78.5079);
 
@@ -43,12 +43,12 @@ class _free2peeState extends State<free2pee>{
       ),
       body: GoogleMap(
         initialCameraPosition: initialPosition, 
-        onMapCreated: (GoogleMapController controller),{
+        onMapCreated: (GoogleMapController controller){
           mapController = controller;
         },
         markers: {
           Marker(
-            markerId: MarkerID('UVA'),
+            markerId: MarkerId('UVA'),
             position: uvaCoordinates,
             infoWindow: const InfoWindow(
               title: 'University of Virginia',
