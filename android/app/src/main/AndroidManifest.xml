@@ -1,5 +1,8 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.free_2_pee">
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
+        
         android:label="free_2_pee"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
@@ -16,7 +19,9 @@
                  while the Flutter UI initializes. After that, this theme continues
                  to determine the Window background behind the Flutter UI. -->
             <meta-data
-              android:name="io.flutter.embedding.android.NormalTheme"
+                android:name="com.google.android.geo.API_KEY"
+
+              android:value="AIzaSyB60sg9G1ukV_V8NdFa2U4xuxvpgvb1-O0"
               android:resource="@style/NormalTheme"
               />
             <intent-filter>
