@@ -27,7 +27,7 @@
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
+  <link rel="icon" type="image/png" href="favicon.png"/> <!---->
 
   <title>free_2_pee</title>
   <link rel="manifest" href="manifest.json">
@@ -39,6 +39,28 @@
   <!-- This script adds the flutter initialization JS code -->
   <script src="flutter.js" defer></script>
     <script src = "https://maps.googleapis.com/maps/api/js?=AIzaSyB60sg9G1ukV_V8NdFa2U4xuxvpgvb1-O0"></script>
+    <script>
+      
+  
+     const apiKey = 'AIzaSyB60sg9G1ukV_V8NdFa2U4xuxvpgvb1-O0';
+
+  function loadGoogleMaps() {
+    var script = document.createElement('script');
+    script.src = 'https://maps.googleapis.com/maps/api/js?key=' + apiKey;
+    script.defer = true;
+    script.async = true;
+    script.onload = function () {
+      // The Google Maps API is loaded and ready for use.
+      // You can trigger your Flutter app initialization here if needed.
+    };
+    document.body.appendChild(script);
+  }
+
+  // Load Google Maps when the window is loaded
+  window.addEventListener('load', loadGoogleMaps);
+</script>
+
+    </script>
 </head>
 <body>
   <script>mobile_maps.
