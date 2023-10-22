@@ -1,7 +1,119 @@
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter_web/google_maps_flutter_web.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'bathroom.dart';
 
+// Conditional import for web
+import 'package:google_maps_flutter_web/google_maps_flutter_web.dart' as test
+    if (dart.library.html) 'package:google_maps_flutter_web/google_maps_flutter_web.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      home: Free2pee(),
+    );
+  }
+}
+
+class Free2pee extends StatefulWidget {
+  const Free2pee({Key? key}) : super(key: key);
+
+  @override
+  _Free2peeState createState() => _Free2peeState();
+}
+
+class _Free2peeState extends State<Free2pee> {
+  GoogleMapController? mapController;
+
+  final LatLng uvaCoordinates = const LatLng(38.0336, -78.5079);
+
+  CameraPosition initialPosition = CameraPosition(
+    target: LatLng(38.0336, -78.5079), // UVA coordinates
+    zoom: 15, // Adjust the zoom level as needed
+  );
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('UVA Bathroom Finder'),
+      ),
+      body: GoogleMap(
+        initialCameraPosition: initialPosition,
+        onMapCreated: (GoogleMapController controller) {
+          setState(() {
+            mapController = controller;
+          });
+        },
+        markers: Set<Marker>.from(sampleBathrooms.map((bathroom) {
+          return Marker(
+            markerId: MarkerId(bathroom.name),
+            position: LatLng(bathroom.latitude, bathroom.longitude),
+            infoWindow: InfoWindow(
+              title: bathroom.name,
+            ),
+          );
+        }),
+      ),
+    ));
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
+
+  final String title;
+
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  int _counter = 0;
+
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text('You have pushed the button this many times:'),
+            Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.headline6,
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: const Icon(Icons.add),
+      ),
+    );
+  }
+}
+
+/*import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart' as mobile_maps;
+import 'package:google_maps_flutter_web/google_maps_flutter_web.dart';
+import 'bathroom.dart';
 
 void main() {
   runApp(const MyApp());
@@ -28,7 +140,7 @@ class free2pee extends StatefulWidget {
 }
 
 class _free2peeState extends State<free2pee> {
-  GoogleMapController? mapController;
+  GoogleMapController mapController;
 
   final LatLng uvaCoordinates = const LatLng(38.0336, -78.5079);
 
@@ -48,10 +160,10 @@ class _free2peeState extends State<free2pee> {
           mapController = controller;
         },
         markers: sampleBathrooms.map((bathroom) {
-          return Marker(
-            markerId: MarkerId(bathroom.name),
+          return mobile_maps.Marker(
+            markerId: mobile_maps.MarkerId(bathroom.name),
             position: LatLng(bathroom.latitude, bathroom.longitude),
-            infoWindow: InfoWindow(
+            infoWindow: mobile_maps.InfoWindow(
               title: bathroom.name,
             ),
           );
@@ -176,3 +288,4 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+*/
